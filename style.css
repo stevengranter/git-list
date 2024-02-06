@@ -1,0 +1,307 @@
+/* Define colour variables */
+
+:root {
+  --clr-git_orange: #f14e32;
+  --clr-octo_blue: #9cdaf0;
+  --clr-neutral_grey: #ccc;
+}
+
+/* Universal border box RESET */
+
+*,
+::before.,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Universal margin and padding RESET */
+* {
+  margin: 0;
+  padding: 0;
+  /* z-index: -10; */
+  /* border: 1px solid magenta; */
+}
+
+/* Google font embed code */
+.source-code pro-232334 {
+  font-family: "Source Code Pro", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: <weight>;
+}
+
+html {
+  font-family: "Avenir", Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: rgb(241, 78, 50);
+  background: linear-gradient(
+    90deg,
+    rgba(241, 78, 50, 1) 50%,
+    rgba(156, 218, 240, 1) 50%
+  );
+  font-size: 1em;
+}
+
+/* Image reset for responsive image sizes */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+main {
+  max-width: 100ch;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #fff;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 8svw;
+  background-color: black;
+  text-align: center;
+  color: white;
+}
+
+h1 {
+  display: inline-block;
+  color: white;
+  vertical-align: middle;
+  line-height: 2em;
+  font-weight: 500;
+}
+
+/* Filter (input label) styles STATIC */
+
+input[type="radio"] {
+  display: none;
+}
+
+main label {
+  font-weight: 600;
+  font-family: "Avenir", Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+label span.icon {
+  width: 6.5lvw;
+
+  min-width: 50px;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+
+  /* Initial state of filter icons is desaturated */
+  filter: saturate(0);
+  display: inline-block;
+}
+
+.curly-brace {
+  font-size: 1.4em;
+}
+
+@media only screen and (max-width: 1000px) {
+  main label {
+    font-size: 2rem;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  header {
+    height: 5rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  main label {
+    font-size: 3.5lvw;
+  }
+  h1 {
+    font-size: 4vw;
+  }
+  header {
+    height: 8vw;
+  }
+}
+
+/* Filter styles for :hover states */
+
+/* On hover, change label colour for git filter */
+label[for="filter--git"]:hover {
+  color: var(--clr-git_orange);
+}
+
+/* On hover, disable saturate(0) filter for label icon git filter */
+label[for="filter--git"]:hover > span.icon {
+  filter: none;
+}
+
+/* On hover, change label colour for github filter */
+label[for="filter--github"]:hover {
+  color: var(--clr-octo_blue);
+}
+
+/* On hover, disable saturate(0) filter for label icon github filter */
+label[for="filter--github"]:hover > span.icon {
+  filter: none;
+}
+
+[value="git"]:checked ~ label[for="filter--git"] {
+  color: var(--clr-git_orange);
+}
+
+[value="git"]:checked ~ label[for="filter--git"] > span.icon {
+  filter: none;
+}
+
+[value="git"]:checked ~ li:not([data-category="github"]) > p {
+  background-color: var(--clr-git_orange);
+  color: white;
+  border-radius: 0px 8px 8px 8px;
+}
+
+[value="git"]:checked ~ li:not([data-category="github"]) > h2 {
+  border-radius: 8px 8px 0 0;
+}
+
+[value="git"]:checked ~ li[data-category="github"] > h2 {
+  background-color: var(--clr-neutral_grey);
+  color: #fff;
+}
+[value="git"]:checked ~ li[data-category="github"] > p {
+  color: var(--clr-neutral_grey);
+}
+
+[value="git"]:checked ~ li:not([data-category="github"]) > h2 > span.icon {
+  /* visibility: visible; */
+  opacity: 100%;
+}
+
+[value="github"]:checked ~ label[for="filter--github"] {
+  color: var(--clr-octo_blue);
+}
+
+[value="github"]:checked ~ label[for="filter--github"] > span.icon {
+  filter: none;
+}
+
+[value="github"]:checked ~ li:not([data-category="git"]) > p {
+  background-color: var(--clr-octo_blue);
+  border-radius: 0px 8px 8px 8px;
+}
+
+[value="github"]:checked ~ li:not([data-category="git"]) > h2 {
+  border-radius: 8px 8px 0 0;
+}
+
+[value="github"]:checked ~ li:not([data-category="git"]) > h2 > span.icon {
+  /* visibility: visible; */
+  opacity: 100%;
+}
+
+[value="github"]:checked ~ li[data-category="git"] > h2 {
+  background-color: var(--clr-neutral_grey);
+  color: #fff;
+}
+[value="github"]:checked ~ li[data-category="git"] > p {
+  color: var(--clr-neutral_grey);
+}
+
+/* List styles STATIC */
+
+ol {
+  counter-reset: listNumbering;
+  list-style-type: none;
+  text-align: center;
+  position: relative;
+}
+
+li {
+  counter-increment: listNumbering;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+}
+
+li:before {
+  content: ">";
+  font-size: 1.5em;
+  font-weight: 800;
+  padding-right: 10px;
+  margin: 0;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  vertical-align: middle;
+  text-align: right;
+  color: var(--clr-neutral_grey);
+  line-height: 1em;
+  width: 34px;
+  height: 34px;
+}
+
+li[data-category="github"] > h2 > span.icon {
+  background-image: url("./images/original-octocat.png");
+}
+
+li[data-category="git"] > h2 > span.icon {
+  background-image: url("./images/icons8-git.png");
+}
+
+h2,
+li > p,
+span.icon {
+  transition: all 1s;
+}
+
+p {
+  padding: 12px;
+  /* ⚠️ CAUTION - Here be magic numbers */
+  margin: 0 34px 12px 30px;
+}
+
+code {
+  font-weight: bold;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Avenir", Arial, Helvetica, sans-serif;
+}
+
+li > h2 {
+  /* Set position:relative to allow absolute placement of child span.icon */
+  display: inline-block;
+  position: relative;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+
+  line-height: 1em;
+  vertical-align: middle;
+}
+
+li > h2 > span.icon {
+  display: inline-block;
+  position: absolute;
+  right: -40px;
+  top: 2px;
+  width: 36px;
+  height: 36px;
+  vertical-align: bottom;
+
+  background-size: cover;
+
+  opacity: 0%;
+}
