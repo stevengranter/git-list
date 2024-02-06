@@ -51,12 +51,16 @@ img {
   height: auto;
 }
 
+/* main content style */
+
 main {
   max-width: 100ch;
   margin: 0 auto;
   padding: 16px;
   background-color: #fff;
 }
+
+/* Typography */
 
 header {
   display: flex;
@@ -71,12 +75,24 @@ header {
   color: white;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Avenir", Arial, Helvetica, sans-serif;
+}
+
 h1 {
   display: inline-block;
   color: white;
   vertical-align: middle;
   line-height: 2em;
   font-weight: 500;
+}
+
+code {
+  font-weight: bold;
 }
 
 /* Filter (input label) styles STATIC */
@@ -133,90 +149,19 @@ label span.icon {
   }
 }
 
-/* Filter styles for :hover states */
+/* List styles */
 
-/* On hover, change label colour for git filter */
-label[for="filter--git"]:hover {
-  color: var(--clr-git_orange);
-}
-
-/* On hover, disable saturate(0) filter for label icon git filter */
-label[for="filter--git"]:hover > span.icon {
-  filter: none;
+h2,
+li > p,
+span.icon {
+  transition: all 1s;
 }
 
-/* On hover, change label colour for github filter */
-label[for="filter--github"]:hover {
-  color: var(--clr-octo_blue);
+p {
+  padding: 12px;
+  /* ⚠️ CAUTION - Here be magic numbers */
+  margin: 0 34px 12px 30px;
 }
-
-/* On hover, disable saturate(0) filter for label icon github filter */
-label[for="filter--github"]:hover > span.icon {
-  filter: none;
-}
-
-[value="git"]:checked ~ label[for="filter--git"] {
-  color: var(--clr-git_orange);
-}
-
-[value="git"]:checked ~ label[for="filter--git"] > span.icon {
-  filter: none;
-}
-
-[value="git"]:checked ~ li:not([data-category="github"]) > p {
-  background-color: var(--clr-git_orange);
-  color: white;
-  border-radius: 0px 8px 8px 8px;
-}
-
-[value="git"]:checked ~ li:not([data-category="github"]) > h2 {
-  border-radius: 8px 8px 0 0;
-}
-
-[value="git"]:checked ~ li[data-category="github"] > h2 {
-  background-color: var(--clr-neutral_grey);
-  color: #fff;
-}
-[value="git"]:checked ~ li[data-category="github"] > p {
-  color: var(--clr-neutral_grey);
-}
-
-[value="git"]:checked ~ li:not([data-category="github"]) > h2 > span.icon {
-  /* visibility: visible; */
-  opacity: 100%;
-}
-
-[value="github"]:checked ~ label[for="filter--github"] {
-  color: var(--clr-octo_blue);
-}
-
-[value="github"]:checked ~ label[for="filter--github"] > span.icon {
-  filter: none;
-}
-
-[value="github"]:checked ~ li:not([data-category="git"]) > p {
-  background-color: var(--clr-octo_blue);
-  border-radius: 0px 8px 8px 8px;
-}
-
-[value="github"]:checked ~ li:not([data-category="git"]) > h2 {
-  border-radius: 8px 8px 0 0;
-}
-
-[value="github"]:checked ~ li:not([data-category="git"]) > h2 > span.icon {
-  /* visibility: visible; */
-  opacity: 100%;
-}
-
-[value="github"]:checked ~ li[data-category="git"] > h2 {
-  background-color: var(--clr-neutral_grey);
-  color: #fff;
-}
-[value="github"]:checked ~ li[data-category="git"] > p {
-  color: var(--clr-neutral_grey);
-}
-
-/* List styles STATIC */
 
 ol {
   counter-reset: listNumbering;
@@ -255,30 +200,6 @@ li[data-category="git"] > h2 > span.icon {
   background-image: url("./images/icons8-git.png");
 }
 
-h2,
-li > p,
-span.icon {
-  transition: all 1s;
-}
-
-p {
-  padding: 12px;
-  /* ⚠️ CAUTION - Here be magic numbers */
-  margin: 0 34px 12px 30px;
-}
-
-code {
-  font-weight: bold;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: "Avenir", Arial, Helvetica, sans-serif;
-}
-
 li > h2 {
   /* Set position:relative to allow absolute placement of child span.icon */
   display: inline-block;
@@ -304,4 +225,115 @@ li > h2 > span.icon {
   background-size: cover;
 
   opacity: 0%;
+}
+
+/* Filter label styles for :hover and checked states */
+
+/* On hover or checked, change label colour for git filter */
+label[for="filter--git"]:hover {
+  color: var(--clr-git_orange);
+}
+
+[value="git"]:checked ~ label[for="filter--git"] {
+  color: var(--clr-git_orange);
+}
+
+/* On hover or checked, disable saturate(0) filter for label icon git filter */
+label[for="filter--git"]:hover > span.icon {
+  filter: none;
+}
+
+[value="git"]:checked ~ label[for="filter--git"] > span.icon {
+  filter: none;
+}
+
+/* On hover or checked, change label colour for github filter */
+label[for="filter--github"]:hover {
+  color: var(--clr-octo_blue);
+}
+
+[value="github"]:checked ~ label[for="filter--github"] {
+  color: var(--clr-octo_blue);
+}
+
+/* On hover or checked, disable saturate(0) filter for label icon github filter */
+label[for="filter--github"]:hover > span.icon {
+  filter: none;
+}
+
+[value="github"]:checked ~ label[for="filter--github"] > span.icon {
+  filter: none;
+}
+
+/* git command styles for filter states */
+
+/* When GIT is checked:
+
+for GIT commands
+1: change background colour of git commands to git orange, text to white,
+2: change border radius to square off lower two corners to connect with paragraph below 
+3: change opacity of hidden icon to 100% 
+
+for GITHUB commands
+4. Change label to white on grey
+5. Change paragraph to grey on white
+
+*/
+
+[value="git"]:checked ~ li[data-category="git"] > p {
+  background-color: var(--clr-git_orange);
+  color: white;
+}
+
+[value="git"]:checked ~ li[data-category="git"] > h2 {
+  border-radius: 8px 8px 0 0;
+}
+
+[value="git"]:checked ~ li[data-category="git"] > h2 > span.icon {
+  opacity: 100%;
+}
+
+[value="git"]:checked ~ li[data-category="github"] > h2 {
+  background-color: var(--clr-neutral_grey);
+  color: #fff;
+}
+[value="git"]:checked ~ li[data-category="github"] > p {
+  color: var(--clr-neutral_grey);
+}
+
+/* github command styles for filter states */
+
+/* When GITHUB is checked:
+
+for GITHUB commands
+1: change background colour of git commands to light blue
+2: change border radius to square off lower two corners to connect with paragraph below 
+3: change opacity of hidden icon to 100% 
+
+for GIT commands
+4. Change label to white on grey
+5. Change paragraph to grey on white
+
+*/
+
+[value="github"]:checked ~ li[data-category="github"] > p {
+  background-color: var(--clr-octo_blue);
+  border-radius: 0px 8px 8px 8px;
+}
+
+[value="github"]:checked ~ li[data-category="github"] > h2 {
+  border-radius: 8px 8px 0 0;
+}
+
+[value="github"]:checked ~ li[data-category="github"] > h2 > span.icon {
+  /* visibility: visible; */
+  opacity: 100%;
+}
+
+[value="github"]:checked ~ li[data-category="git"] > h2 {
+  background-color: var(--clr-neutral_grey);
+  color: #fff;
+}
+[value="github"]:checked ~ li[data-category="git"] > p {
+  color: var(--clr-neutral_grey);
 }
